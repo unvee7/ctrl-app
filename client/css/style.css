@@ -1,0 +1,249 @@
+body {
+  padding: 30px;
+}
+
+h1 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin: auto;
+  text-align: center;
+}
+
+.appContainer {
+  display: block;
+}
+
+.header {
+  height: 100px;
+  z-index: 999;
+  /* position: -webkit-sticky; */
+  position: relative;
+  white-space: normal;
+  background-color: white;
+  top: 0px;
+  /* padding: 30px 0 30px 0; */
+}
+
+.mark {
+  width: 150px;
+  /* justify-content: flex-start; */
+}
+
+.grid {
+  display: grid;
+  /* grid-template-columns: 150px auto 5% 5% 5% 5% 5% 5%; */
+  grid-template-columns: 3fr 1fr;
+  /* grid-template-rows: auto; */
+  grid-gap: 1em;
+  width: 100%;
+  height: auto;
+  white-space: normal;
+}
+
+.nav {
+  align-self: end;
+  justify-self: stretch;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navItem {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 0 0 35px;
+  /* justify-self: self-end; */
+}
+
+.searchBar {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  border: none;
+  text-decoration: underline;
+  list-style-type:none;
+  font-size: 12px;
+  display: inline-block;
+  /* box-sizing : border-box; */
+  /* min-width: 100%;
+  max-width: 100%; */
+  /* display: flex;
+  align-self:stretch; */
+  /* width: calc(inherit - inherit/2); */
+}
+
+.searchBar > input {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* --------------------- BRICK STYLE ------------------------- */
+.brick {
+  background-color: orange;
+  margin: auto;
+  text-align: center;
+  overflow: hidden;
+  width: calc(20% - 16px) !important;
+  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.brick:hover {
+  box-shadow: 8px 10px 19px #a2a2a2;
+}
+
+.brick > img {
+  width: 100%;
+  text-align: center;
+  -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+/* .brick > img:hover {
+  width: 120%;
+  max-height: 100%;
+} */
+
+.searchBar:focus {
+  outline: none;
+  text-decoration: underline;
+  /* text-align: right; */
+}
+
+.singleViewFlexbox {
+  display: flex;
+  width: auto;
+}
+
+.singleViewFlexbox > img {
+  height: 100vh;
+}
+
+.singleViewFlexbox > .details {
+  height: 100vh;
+}
+
+.exitX {
+  background-color: black;
+}
+
+.exitX:hover {
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block !important;
+}
+
+.addTagsContainer {
+  display: flex;
+  width: 100%;
+}
+
+.addTagsContainer > textarea {
+  width: 100%;
+  background-color: grey;
+}
+
+.addTagsContainer > button {
+  background-color: red;
+  text-align: center;
+}
+
+/* --------------------- WALL STYLE ------------------------- */
+.wall {
+  margin-top: 35px;
+  position: relative;
+  width: 100% !important;
+}
+
+.blur {
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  /* filter: blur(1.2px); */
+}
+
+.modalBackground {
+  position: fixed !important;
+  z-index: 9999 !important;
+  top: 0px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  left: 0px !important;
+  overflow-y: auto !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  padding: 64px !important;
+  display: inline-block;
+}
+
+.uploader {
+  margin: auto;
+  padding: 75px;
+  background-color: white;
+  z-index: 99999;
+  box-shadow: 13px 13px 79px #262626;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.uploadForm {
+  display: block;
+}
+
+.exit {
+  width: 25px;
+  margin: 35px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display:block;
+}
+
+.uploadForm > button {
+  height: 50px;
+  background-color: #231f20;
+  text-align: center;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  border: none;
+  margin-top: 14px;
+}
+
+.uploadForm > input, textarea {
+  width: 100%;
+  margin-top: 20px;
+}
+
+textarea {
+  -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  background-color: #eeeeee;
+  border: none;
+  padding: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.pointer:hover {
+  color: #9c9c9c;
+}
+
+.submit {
+  color: white;
+}
