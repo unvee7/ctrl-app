@@ -1,4 +1,10 @@
-import {createStore } from 'redux';
-import { Provider } from 'react-redux';
+import {createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers/rootReducer.js';
 
-const store = createStore()
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+)
+
+export default store;

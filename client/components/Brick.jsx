@@ -1,4 +1,5 @@
 const React = require('react');
+import { connect } from 'react-redux';
 
 class Brick extends React.Component {
   constructor(props) {
@@ -48,4 +49,13 @@ class Brick extends React.Component {
   }
 }
 
+// const mapStateToProps = (state, ownProps) => {
+//   // need to set up routes on server
+//   let id = ownProps.match.params.post_id;
+//   return {
+//     photo: state.photo.find((photo) => post.id === id)
+//   }
+// }
+
+// export default connect(mapStateToProps)(Brick);
 module.exports = Brick;
