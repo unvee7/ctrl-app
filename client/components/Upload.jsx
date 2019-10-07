@@ -2,18 +2,13 @@ const React = require('react');
 const $ = require('jquery');
 const axios = require('axios');
 
+import { connect } from 'react-redux';
+import { addNewPhoto, toggleModal } from '../redux/thunks/addNewPhoto.js';
+
 class Upload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      file: '',
-      tags: '',
-      createdBy: 'dev'
-    }
     this.submitHandler = this.submitHandler.bind(this);
-    this.changeHandler = this.changeHandler.bind(this);
-    this.toggleUpload = this.toggleUpload.bind(this);
-
   }
 
   submitHandler(e) {
@@ -23,53 +18,26 @@ class Upload extends React.Component {
 
     var imagefile = document.getElementById('uploadedFile');
     formData.append('file', imagefile.files[0]);
-    formData.append('tags', this.state.tags);
+    formData.append('tags', this.props.tags);
     formData.append('createdBy', 'sonny');
 
-    axios({
-      method: 'post',
-      url: '/api/newOne',
-      type: 'multipart/form-data',
-      data: formData,
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err.response);
-      });
-      this.toggleUpload();
-  }
-
-  toggleUpload() {
-    // if(e.target !== e.currentTarget) return;
-    this.setState({
-      isClicked: !this.state.isClicked
-    })
-  }
-
-  changeHandler(e) {
-    e.preventDefault();
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    this.props.upload(formData);
   }
 
   render() {
-    const { file, tags} = this.state;
-    if (!this.state.isClicked) {
+    if (!this.props.isActive) {
       return (
-        <div className='navItem pointer' onClick={this.toggleUpload} > Upload</div>
+        <div className='navItem pointer' onClick={(e) => this.props.toggle(e, this.props.isActive)} > Upload</div>
       )
     } else {
       return (
-        <div className='modalBackground' onClick={this.props.toggleOff}>
+        <div className='modalBackground' onClick={(e) => this.props.toggle(e, this.props.isActive)}>
           <div className='uploader'>
             <h1>Upload.</h1>
-          <img src='./imgs/x.png' className='exit' onClick={this.toggleUpload}/>
+          <img src='./imgs/x.png' className='exit' onClick={(e) => this.props.toggle(e, this.props.isActive)}/>
             <form id='uploadForm' className='uploadForm' encType='multipart/form-data' onSubmit={this.submitHandler}>
-              <input id='uploadedFile' type='file' name='file' accept='image/*' value={file} onChange={this.changeHandler}/>
-              <textarea name='tags' type='textarea' value={tags} placeholder='Separate tags with a comma (,)' rows='5' onChange={this.changeHandler}></textarea>
+              <input id='uploadedFile' type='file' name='file' accept='image/*' />
+              <textarea name='tags' type='textarea' placeholder='Separate tags with a comma (,)' rows='5' ></textarea>
               <button type='submit' className='submit'> Upload</button>
             </form>
             </div>
@@ -79,4 +47,26 @@ class Upload extends React.Component {
   }
 }
 
-module.exports = Upload;
+const mapStateToProps = (state) => {
+  return {
+    file: state.newPhoto.file,
+    tags: state.newPhoto.tags,
+    createdBy: state.newPhoto.createdBy,
+    isActive: state.newPhoto.isActive
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    upload: (form) => dispatch(addNewPhoto(form)),
+    toggle: (e, bool) => {
+      // allow user to click inside modal without dispatching toggleModal
+      if(e.target !== e.currentTarget) return;
+      dispatch(toggleModal(bool))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Upload);
+
+// module.exports = Upload;

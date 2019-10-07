@@ -2,15 +2,15 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Search = require('./Search.jsx');
 const Wall = require('./Wall.jsx');
-const Upload = require('./Upload.jsx');
 const Download = require('./Download.jsx');
+
+import { connect } from 'react-redux';
+import Upload from './Upload.jsx';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      test : null,
-    }
+
   }
 
   render() {
@@ -30,4 +30,12 @@ class Navigation extends React.Component {
   }
 }
 
-module.exports = Navigation;
+// const mapStateToProps = (state) => {
+//   return {
+//     nav: true
+//   }
+// }
+
+export default connect()(Navigation)
+// export default Navigation;
+// module.exports = Navigation;

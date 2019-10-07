@@ -1,10 +1,8 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Search = require('./Search.jsx');
-const Upload = require('./Upload.jsx');
-// const Wall = require('./Wall.jsx');
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import Wall from './Wall.jsx';
-const Navigation = require('./Navigation.jsx');
+import Navigation from './Navigation.jsx';
 const $ = require('jquery');
 
 class App extends React.Component {
