@@ -1,11 +1,12 @@
 // THese are action creators =)
-const newAddedFile = (file) => {
-  console.log(file)
+import store from '../store.js';
+const newAddedFile = (num) => {
+  console.log('action creators dispatched')
+  console.log(store)
+  console.log(num)
   return {
     type: 'NEW_FILE',
-    file: file.file,
-    tags: file.tags,
-    createdBy: file.user
+    photoCount: num
   }
 }
 

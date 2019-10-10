@@ -1,8 +1,9 @@
 import { newAddedFile, modalIsActive } from '../actions/uploadAction.js';
+import axios from 'axios';
+import fetchPhotos from './fetchPhotos.js';
 
-const uploadNewPhoto = (formData) => {
+const addNewPhoto = (formData, numPhotos) => {
   return dispatch => {
-    console.log('trying to upload photo')
     axios({
       method: 'post',
       url: '/api/newOne',
@@ -10,7 +11,11 @@ const uploadNewPhoto = (formData) => {
       data: formData,
       })
       .then(res => {
-        console.log(res);
+        console.log('this is where we dispatch')
+        return fetchPhotos(null);
+      })
+      .then( () => {
+        return dispatch(newAddedFile(numPhotos))
       })
       .catch(err => {
         console.log(err.response);
@@ -20,8 +25,7 @@ const uploadNewPhoto = (formData) => {
 }
 
 const toggleModal = (bool) => {
-  console.log('this is the boolean: ' + bool)
   return modalIsActive(bool)
 }
 
-export { uploadNewPhoto, toggleModal };
+export { addNewPhoto, toggleModal };

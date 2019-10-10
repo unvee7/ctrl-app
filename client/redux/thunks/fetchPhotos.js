@@ -8,20 +8,19 @@ import axios from 'axios';
 // https://blog.isquaredsoftware.com/2016/10/idiomatic-redux-why-use-action-creators/
 
 const fetchPhotos = (cb) => {
-  console.log('fetch Photos called: #3' )
   return dispatch => {
     axios.get('http://localhost:2000/api/all')
-    .then(dispatch(populatePending(false)))
     .then(({ data }) => {
-      console.log('api called for data vvv #4')
-      console.log(data)
       dispatch(populateSuccess(data.photos));
-      console.log('callback called in server')
     })
     .then(() => {
-      cb()
+      console.log('bout to pack that')
+      if (cb) {
+        return cb();
+      }
       // pack the grid items =)
     })
+    .then(dispatch(populatePending(false)))
   }
 }
 

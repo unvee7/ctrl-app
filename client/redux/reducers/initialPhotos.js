@@ -14,6 +14,7 @@ const testData = {
 const initState = {
   pending: true,
   photos: [],
+  photoCount: 0,
   error: null
 }
 
@@ -29,7 +30,8 @@ const initPhotosReducer = (state = initState, action) => {
       return {
         ...state,
         pending: false,
-        photos: action.photos
+        photos: action.photos,
+        photoCount: action.photos.length
       }
     case 'POPULATE_ERROR':
       return {

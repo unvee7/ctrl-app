@@ -42,23 +42,37 @@ class Wall extends React.Component {
     });
 
     this.instance
-      .on('pack',   () => console.log('ALL grid items packed. '))
-      .on('update', () => console.log('NEW grid items packed.'))
+      .on('pack',   () => {
+        this.populateWall()
+        console.log('ALL grid items packed. ')
+      })
+      .on('update', () => {
+        this.populateWall();
+        console.log('NEW grid items packed.')
+      })
       .on('resize', size => console.log('The grid has be re-packed to accommodate a new BREAKPOINT.'))
+
+    setTimeout(this.instance.pack, 700);
+    // this.instance.pack();
   }
 
   componentWillMount() {
-    console.log('component will mount / call populate #2')
+    // console.log('component will mount / call populate #2')
   }
 
   componentDidMount() {
-    console.log('component mounted: #7');
+    // console.log('component mounted: #7');
+    console.log('component mounted');
+
+    window.addEventListener('resize', () => {
+      setTimeout(this.buildWall, 200);
+    });
     this.buildWall();
     this.props.populate(this.instance.pack);
   }
 
   render() {
-    console.log('app rendered with these vv props: #5')
+    // console.log('app rendered with these vv props: #5')
     const loadingDiv = <div ref={this.myRef}> <h1>LOADING imgaes</h1></div>;
     const wall = <div className='wall' ref={this.myRef}>
       {this.populateWall()}
@@ -69,8 +83,8 @@ class Wall extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state mapped #1');
-  console.log(state)
+  // console.log('state mapped #1');
+  // console.log(state)
   return {
     error: state.populate.error,
     photos: state.populate.photos,

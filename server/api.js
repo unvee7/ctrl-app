@@ -73,28 +73,12 @@ router.get('/:photoId', function (req, res) {
   .catch( err => console.log(err))
 })
 
-//ADD NEW
-router.post('/all', function(req, res, next) {
-  // let photo = new Photo(req.body); // This creates a new instance of the Photo model in database/models/photo... now we can call built in methods on it?
-  // photo.save();
-  // ^^ does same thing as vv // uses Photo model to create new instance based on req.body
-  // Photo.create(req.body).then(function(){
-  //   res.send({
-  //     // id: req.body.id,
-  //     name: req.body.name,
-  //     tags: req.body.tags.split(',').map(tag => tag.trim()),
-  //     description: req.body.description,
-  //     location: req.body.location,
-  //     user: req.body.user
-  //   })
-  // }).catch(next); // calls save in this method // returns a promise
-})
-
 //ADD one
 router.post('/newOne', upload.single('file'), (req, res, next) => {
   const newPhoto = new Photo ( {
     file: req.file.filename,
-    tags: req.body.tags.split(','),
+    tags: req.body.tags.split(',').map((word) => word.trim()),
+    // tags: req.body.tags.split(','),
     createdBy: req.body.createdBy,
     dateAdded: new Date(),
     views: 0,

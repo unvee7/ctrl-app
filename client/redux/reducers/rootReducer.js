@@ -4,7 +4,7 @@ import uploadModalReducer from './uploadModal.js';
 
 const rootReducer = combineReducers({
   populate: initPhotosReducer,
-  newPhoto: uploadModalReducer
+  addNewPhoto: uploadModalReducer
   // initPhotosReducer,
   // uploadModalReducer
 })
