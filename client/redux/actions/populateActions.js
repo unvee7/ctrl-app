@@ -1,3 +1,4 @@
+// these are action creators
 const populatePending = (bool) => ({
   type: 'POPULATE_PENDING',
   pending: bool

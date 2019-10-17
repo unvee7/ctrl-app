@@ -14,7 +14,7 @@ const fetchPhotos = (cb) => {
       dispatch(populateSuccess(data.photos));
     })
     .then(() => {
-      console.log('bout to pack that')
+      // console.log('bout to pack that')
       if (cb) {
         return cb();
       }

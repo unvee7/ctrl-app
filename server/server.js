@@ -19,8 +19,10 @@ app.use(function(err, req, res, next){
 app.use('/api', routes);
 app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
+
 app.use(function(err, req, res, next) {
   if (err) {
+    req.body = {}
     res.status(422).send({error: err.message})
   }
 });

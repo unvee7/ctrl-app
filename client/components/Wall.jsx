@@ -1,6 +1,5 @@
 import React from 'react';
 import Bricks from 'bricks.js';
-import store from '../redux/store.js';
 import fetchPhotos from '../redux/thunks/fetchPhotos.js';
 const Brick = require('./Brick.jsx');
 const $ = require('jquery');
@@ -44,11 +43,11 @@ class Wall extends React.Component {
     this.instance
       .on('pack',   () => {
         this.populateWall()
-        console.log('ALL grid items packed. ')
+        // console.log('ALL grid items packed. ')
       })
       .on('update', () => {
         this.populateWall();
-        console.log('NEW grid items packed.')
+        // console.log('NEW grid items packed.')
       })
       .on('resize', size => console.log('The grid has be re-packed to accommodate a new BREAKPOINT.'))
 
@@ -62,7 +61,6 @@ class Wall extends React.Component {
 
   componentDidMount() {
     // console.log('component mounted: #7');
-    console.log('component mounted');
 
     window.addEventListener('resize', () => {
       setTimeout(this.buildWall, 200);

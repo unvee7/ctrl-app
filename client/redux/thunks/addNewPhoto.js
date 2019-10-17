@@ -1,4 +1,4 @@
-import { newAddedFile, modalIsActive } from '../actions/uploadAction.js';
+import { addFileActionCreator, toggleModalActionCreator } from '../actions/uploadActionCreators.js';
 import axios from 'axios';
 import fetchPhotos from './fetchPhotos.js';
 
@@ -15,7 +15,7 @@ const addNewPhoto = (formData, numPhotos) => {
         return fetchPhotos(null);
       })
       .then( () => {
-        return dispatch(newAddedFile(numPhotos))
+        return dispatch(addFileActionCreator(numPhotos))
       })
       .catch(err => {
         console.log(err.response);
@@ -25,7 +25,7 @@ const addNewPhoto = (formData, numPhotos) => {
 }
 
 const toggleModal = (bool) => {
-  return modalIsActive(bool)
+  return toggleModalActionCreator(bool)
 }
 
 export { addNewPhoto, toggleModal };

@@ -4,7 +4,6 @@ const axios = require('axios');
 
 import { connect } from 'react-redux';
 import { addNewPhoto, toggleModal } from '../redux/thunks/addNewPhoto.js';
-import store from '../redux/store.js';
 
 class Upload extends React.Component {
   constructor(props) {
