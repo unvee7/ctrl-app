@@ -1,6 +1,6 @@
 import React from 'react';
 import Bricks from 'bricks.js';
-import store from '../redux/store.js';
+import _ from 'lodash';
 import fetchPhotos from '../redux/thunks/fetchPhotos.js';
 const Brick = require('./Brick.jsx');
 const $ = require('jquery');
@@ -19,7 +19,7 @@ class Wall extends React.Component {
     // console.log('populateWall called #6');
     if (!this.props.pending) {
       return (
-        this.props.photos.map( brick => (
+        _.reverse(this.props.photos).map( brick => (
           <Brick key={brick.id} brick={brick}/>
         ))
       )
@@ -43,17 +43,19 @@ class Wall extends React.Component {
 
     this.instance
       .on('pack',   () => {
-        this.populateWall()
+        // this.buildWall();
+        this.populateWall();
         console.log('ALL grid items packed. ')
       })
       .on('update', () => {
+        // this.buildWall();
         this.populateWall();
-        console.log('NEW grid items packed.')
+        // console.log('NEW grid items packed.')
       })
       .on('resize', size => console.log('The grid has be re-packed to accommodate a new BREAKPOINT.'))
 
     setTimeout(this.instance.pack, 700);
-    // this.instance.pack();
+    // this.instance.pack()
   }
 
   componentWillMount() {
@@ -62,7 +64,6 @@ class Wall extends React.Component {
 
   componentDidMount() {
     // console.log('component mounted: #7');
-    console.log('component mounted');
 
     window.addEventListener('resize', () => {
       setTimeout(this.buildWall, 200);
@@ -77,6 +78,7 @@ class Wall extends React.Component {
     const wall = <div className='wall' ref={this.myRef}>
       {this.populateWall()}
     </div>
+
     return this.props.pending ? loadingDiv : wall;
 
   }
@@ -84,17 +86,18 @@ class Wall extends React.Component {
 
 const mapStateToProps = (state) => {
   // console.log('state mapped #1');
-  // console.log(state)
+  console.log(state)
   return {
     error: state.populate.error,
     photos: state.populate.photos,
-    pending: state.populate.pending
+    pending: state.populate.pending,
+    photoCount: state.populate.photoCount
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    populate: (cb) => dispatch(fetchPhotos(cb))
+    populate: (cb) => dispatch(fetchPhotos(cb)) // ***** FETCHPHOTOS IS NOT AT ACTION \\ but populate is
   }
 }
 

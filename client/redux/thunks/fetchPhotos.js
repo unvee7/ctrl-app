@@ -14,13 +14,17 @@ const fetchPhotos = (cb) => {
       dispatch(populateSuccess(data.photos));
     })
     .then(() => {
-      console.log('bout to pack that')
+      // console.log('bout to pack that')
       if (cb) {
         return cb();
       }
       // pack the grid items =)
     })
     .then(dispatch(populatePending(false)))
+    .catch((err) => {
+      throw new Error(err)
+    })
+
   }
 }
 

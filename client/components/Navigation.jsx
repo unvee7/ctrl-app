@@ -6,11 +6,22 @@ const Download = require('./Download.jsx');
 
 import { connect } from 'react-redux';
 import Upload from './Upload.jsx';
+import { addFileActionCreator, toggleModalActionCreator } from '../redux/actions/uploadActionCreators.js';
 
 class Navigation extends React.Component {
   constructor(props) {
     super(props);
+    this.toggleModalHandler = this.toggleModalHandler.bind(this);
+  }
 
+  toggleModalHandler(e) {
+    if (e.target.getAttribute('name') === 'upload') {
+      this.props.toggle(this.props.isActive)
+    } else {
+      console.log('nope')
+    }
+
+    console.log('modal handerl lcick')
   }
 
   render() {
@@ -18,8 +29,8 @@ class Navigation extends React.Component {
         <div className='header grid'>
           <img className='mark' src='./imgs/ctrl.svg'></img>
           <div className='nav' >
-            <Upload />
-            <Download />
+          <div className='navItem' onClick={(e) => this.toggleModalHandler(e)} name='upload'> Upload </div>
+            <div className='navItem' onClick={(e) => this.toggleModalHandler(e)} name='download'> Download </div>
             <div className='navItem'> Art </div>
             <div className='navItem'> Polaroid </div>
             <div className='navItem'> About </div>
@@ -30,12 +41,20 @@ class Navigation extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     nav: true
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    isActive: state.addNewPhoto.isActive
+  }
+}
 
-export default connect()(Navigation)
+const mapDispatchToProps = (dispatch) => {
+  // this is where the action creators are mapped to the component for it to use
+  return {
+    toggle: (bool) => dispatch(toggleModalActionCreator(bool))
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
+
 // export default Navigation;
 // module.exports = Navigation;

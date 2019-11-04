@@ -2,9 +2,12 @@ const React = require('react');
 const $ = require('jquery');
 const axios = require('axios');
 
+
+import fetchPhotos from '../redux/thunks/fetchPhotos.js';
 import { connect } from 'react-redux';
 import { addNewPhoto, toggleModal } from '../redux/thunks/addNewPhoto.js';
-import store from '../redux/store.js';
+import { addFileActionCreator, toggleModalActionCreator } from '../redux/actions/uploadActionCreators.js';
+
 
 class Upload extends React.Component {
   constructor(props) {
@@ -31,6 +34,7 @@ class Upload extends React.Component {
     this.props.upload(formData, this.props.photoCount);
     // hide modal
     this.props.toggle(this.props.isActive);
+    // this.props.populate(() => dispatch(populatePending(true)))
   }
 
   changeHandler(e) {
@@ -48,13 +52,8 @@ class Upload extends React.Component {
   render() {
     console.log(this.props)
     const { tags } = this.state;
-    if (!this.props.isActive) {
-      // $('.appContainer').removeClass('blur');
-      return (
-        <div className='navItem pointer' onClick={this.toggleHandler} > Upload</div>
-      )
-    } else {
-      // $('.appContainer').addClass('blur');
+    if (this.props.isActive) {
+      $('.appContainer').addClass('blur');
       return (
         <div className='modalBackground' onClick={this.toggleHandler}>
           <div className='uploader'>
@@ -68,7 +67,10 @@ class Upload extends React.Component {
             </div>
           </div>
         )
-          }
+    } else {
+      $('.appContainer').removeClass('blur');
+      return (<div></div>)
+    }
   }
 }
 
@@ -82,7 +84,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     upload: (form, numPhotos) => dispatch(addNewPhoto(form, numPhotos)),
-    toggle: (bool) => dispatch(toggleModal(bool))
+    toggle: (bool) => dispatch(toggleModal(bool)),
+    populate: (cb) => dispatch(fetchPhotos(cb))
   }
 }
 
