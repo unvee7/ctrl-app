@@ -10,10 +10,7 @@ const addNewPhoto = (formData, numPhotos) => {
       type: 'multipart/form-data',
       data: formData,
       })
-      .then(res => {
-        console.log('this is where we dispatch')
-        return fetchPhotos(null);
-      })
+
       .then( () => {
         return dispatch(addFileActionCreator(numPhotos))
       })

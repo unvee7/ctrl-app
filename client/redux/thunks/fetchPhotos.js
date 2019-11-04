@@ -21,6 +21,10 @@ const fetchPhotos = (cb) => {
       // pack the grid items =)
     })
     .then(dispatch(populatePending(false)))
+    .catch((err) => {
+      throw new Error(err)
+    })
+
   }
 }
 

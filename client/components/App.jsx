@@ -13,28 +13,15 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.props.isActive) {
-      $('.appContainer').addClass('blur');
-      return (
-        <div>
-          <Upload />
-          <div className='appContainer'>
-            <Navigation />
-            <Wall />
-          </div>
+    return (
+      <div>
+        <Upload />
+        <div className='appContainer'>
+          <Navigation />
+          <Wall />
         </div>
-      )
-    } else {
-      $('.appContainer').removeClass('blur');
-      return (
-        <div>
-          <div className='appContainer'>
-            <Navigation />
-            <Wall />
-          </div>
-        </div>
-      )
-    }
+      </div>
+    )
   }
 }
 

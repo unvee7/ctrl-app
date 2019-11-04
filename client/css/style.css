@@ -79,6 +79,7 @@ h1 {
 /* --------------------- BRICK STYLE ------------------------- */
 .brick {
   background-color: orange;
+  /* border: 5px solid black; */
   margin: auto;
   text-align: center;
   overflow: hidden;
@@ -88,6 +89,7 @@ h1 {
     -o-transition: all 0.5s ease;
     -ms-transition: all 0.5s ease;
     transition: all 0.5s ease;
+
 }
 
 .brick:hover {
@@ -97,6 +99,7 @@ h1 {
 .brick > img {
   width: 100%;
   text-align: center;
+  display: block;
   -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -167,8 +170,8 @@ h1 {
 }
 
 .blur {
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+  filter: blur(18px);
+  -webkit-filter: blur(18px);
   /* filter: blur(1.2px); */
 }
 
