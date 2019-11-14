@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const morgan = require('morgan');
 
+
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './uploads/')
@@ -97,6 +98,11 @@ router.post('/newOne', upload.single('file'), (req, res, next) => {
     post: newPhoto
   })
 })
+
+// ADD multiple
+// router.post('/folder-upload', upload.array('files', 12), (req, res, next) => {
+//   const files =
+// })
 
 //UPDATE one
 router.put('/all/:id', function(req, res) {

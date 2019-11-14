@@ -4,16 +4,7 @@ import $ from 'jquery';
 import App from './components/App.jsx';
 require('./css/style.css');
 import { Provider } from 'react-redux';
-import {createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from './redux/reducers/rootReducer.js';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
-    applyMiddleware(thunk)
-  ));
-
+import store from './redux/store.js';
 // const store = createStore(
 //   rootReducer,
 //   applyMiddleware(thunk)

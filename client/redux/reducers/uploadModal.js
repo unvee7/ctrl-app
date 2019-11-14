@@ -7,14 +7,7 @@ const initState = {
 }
 
 const uploadModalReducer = (state = initState, action) => {
-  if (action.type === 'NEW_FILE') {
-    console.log('thisistheACTIONv')
-    console.log(action)
-    return {
-      ...state,
-      photoCount: ++action.photoCount
-    }
-  } else if (action.type === 'MODAL_IS_ACTIVE') {
+  if (action.type === 'MODAL_IS_ACTIVE') {
     // console.log('modal action dispatched')
     // console.log(action)
     return {

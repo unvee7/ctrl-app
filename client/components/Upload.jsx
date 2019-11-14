@@ -2,12 +2,11 @@ const React = require('react');
 const $ = require('jquery');
 const axios = require('axios');
 
-
-import fetchPhotos from '../redux/thunks/fetchPhotos.js';
 import { connect } from 'react-redux';
-import { addNewPhoto, toggleModal } from '../redux/thunks/addNewPhoto.js';
 import { addFileActionCreator, toggleModalActionCreator } from '../redux/actions/uploadActionCreators.js';
-
+import store from '../redux/store.js';
+import { populatePending, populateSuccess, populateError } from '../redux/actions/populateActions.js';
+import { addNewPhoto, toggleModal, refreshPhotos } from '../redux/thunks/addNewPhoto.js';
 
 class Upload extends React.Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class Upload extends React.Component {
     this.toggleHandler = this.toggleHandler.bind(this);
   }
 
-  submitHandler(e) {
+  async submitHandler(e) {
     e.preventDefault();
     // create 'multipart/form-data' for request type
     const formData = new FormData();
@@ -34,7 +33,13 @@ class Upload extends React.Component {
     this.props.upload(formData, this.props.photoCount);
     // hide modal
     this.props.toggle(this.props.isActive);
+    // this.props.setPendingTo(true);
+    console.log(this.props);
     // this.props.populate(() => dispatch(populatePending(true)))
+    // store.dispatch(populatePending(true));
+    let photos = await axios.get('http://localhost:2000/api/all');
+    store.dispatch(refreshPhotos());
+    // store.dispatch(populatePending(false));
   }
 
   changeHandler(e) {
@@ -84,8 +89,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     upload: (form, numPhotos) => dispatch(addNewPhoto(form, numPhotos)),
-    toggle: (bool) => dispatch(toggleModal(bool)),
-    populate: (cb) => dispatch(fetchPhotos(cb))
+    toggle: (bool) => dispatch(toggleModal(bool))
   }
 }
 

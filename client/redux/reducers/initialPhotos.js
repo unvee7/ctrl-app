@@ -39,9 +39,16 @@ const initPhotosReducer = (state = initState, action) => {
         pending: false,
         error: action.error
       }
+    case 'NEW_FILE':
+      return {
+        ...state,
+        photoCount: action.photoCount + 1
+      }
     default:
       return state;
   }
 }
 
 export default initPhotosReducer;
+
+
