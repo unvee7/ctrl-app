@@ -100,8 +100,32 @@ router.post('/newOne', upload.single('file'), (req, res, next) => {
 })
 
 // ADD multiple
-// router.post('/folder-upload', upload.array('files', 12), (req, res, next) => {
-//   const files =
+// router.post('/multiple-files', upload.array('files', 12), (req, res, next) => {
+//   const files = req.files;
+//   console.log(files);
+//   files.map( file => {
+//     const newPhoto = new Photo ( {
+//       file: file.filename,
+//       tags: req.body.tags.split(',').map((word) => word.trim()),
+//       // tags: req.body.tags.split(','),
+//       createdBy: req.body.createdBy,
+//       dateAdded: new Date(),
+//       views: 0,
+//       downloads: 0
+//     })
+//     newPhoto.save()
+//     .then( result => {
+//       console.log('saved Mongoos entry: ' + result);
+//       // console.dir(req.body)
+//     })
+//     .catch( err => {
+//       console.log(err)
+//     })
+//     res.status(201).json({
+//       message: 'New photo added! Yay!',
+//       post: newPhoto
+//     })
+//   })
 // })
 
 //UPDATE one

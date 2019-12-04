@@ -1,38 +1,9 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 
 export default React.createContext({
-  photos: [],
   modalIsActive: false,
   pending: true,
-  getPhotos: () => {},
+  // might not need these vvv since properties above have methods in them..?
   setPending: (bool) => {},
   toggleModal: (e) => {}
 })
-
-
-
-
-// export const PhotosContext = createContext({});
-
-// class PhotosContextProvider extends Component() {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       photos: [],
-//       modalIsActive: false,
-//       pending: true
-//     }
-//   }
-
-
-//   render() {
-//     return (
-//       <PhotosContextProvider value={{...this.state}}>
-//         {this.props.children}
-//       </PhotosContextProvider>
-//     )
-//   }
-// }
-
-// export default PhotosContextProvider;

@@ -5,6 +5,7 @@ class Brick extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      key: props.brick._id,
       id: props.brick._id,
       file: props.brick.file,
       tags: props.brick.tags,
