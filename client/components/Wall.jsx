@@ -43,7 +43,6 @@ const Wall = () => {
       .on('pack',   () => {
         console.log('ALL grid items packed. #5')
         // this.props.setPendingTo(false);
-        setPending(false)
       })
       .on('update', () => {
         console.log('NEW grid items packed.')
@@ -65,15 +64,17 @@ const Wall = () => {
   const getData = async () => {
     await axios.get('http://localhost:2000/api/all')
       .then( res => {
-        console.log(res)
+        console.log('axios call')
         setWallData({
           photos: res.data.photos,
           wall: main(),
           wallInstance: setUpWall()
         })
+      }).then( () => {
+        setPending(false)
       })
       .then( ()=> {
-        wallData.wallInstance.pack()
+        setTimeout(wallData.wallInstance.pack, 500);
       })
   }
 

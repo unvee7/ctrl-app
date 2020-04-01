@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PhotoSchema = new Schema({
-  file: {
+  name: {
     type: String,
+    required: [true, 'name is required']
+  },
+  file: {
+    type: Buffer,
     required: [true, 'file is required']
   },
-  // file: {
-  //   data: Buffer,
-  //   contentType: String,
-  //   required: [true, 'Name is required']
-  // },
   tags: [],
   createdBy: {
     type: String,

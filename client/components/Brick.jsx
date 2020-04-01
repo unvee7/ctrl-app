@@ -5,7 +5,7 @@ class Brick extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: props.brick._id,
+      key: props.key,
       id: props.brick._id,
       file: props.brick.file,
       tags: props.brick.tags,
@@ -24,6 +24,7 @@ class Brick extends React.Component {
     return (
       <div className='singleViewFlexbox'>
           <img className='' src={this.state.file}> </img>
+          {console.log(this.state.file)}
           <div className='details'>
             <div className='exitX'></div>
             <h1> # {this.state.id} </h1>
@@ -44,7 +45,7 @@ class Brick extends React.Component {
   render() {
     return (
       <div className='brick'>
-        <img src={this.state.file}/>
+        <img src={`data:image/png;base64,${this.state.file}`}/>
       </div>
     )
   }
