@@ -1,5 +1,8 @@
 const React = require('react');
 import { connect } from 'react-redux';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 class Brick extends React.Component {
   constructor(props) {
@@ -45,6 +48,10 @@ class Brick extends React.Component {
   render() {
     return (
       <div className='brick'>
+        {/* <LazyLoadImage
+          src={`data:image/png;base64,${this.state.file}`} // use normal <img> attributes as props
+          effect="blur"
+        /> */}
         <img src={`data:image/png;base64,${this.state.file}`}/>
       </div>
     )

@@ -83,7 +83,7 @@ h1 {
   margin: auto;
   text-align: center;
   overflow: hidden;
-  width: calc(20% - 16px) !important;
+  /* width: calc(20% - 16px) !important; */
   -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -167,6 +167,11 @@ h1 {
   margin-top: 35px;
   position: relative;
   width: 100% !important;
+
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+
 }
 
 .blur {
@@ -250,4 +255,34 @@ textarea {
 
 .submit {
   color: white;
+}
+
+
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  background: grey;
+  margin-bottom: 30px;
+}
+
+.my-masonry-grid {
+  margin-left: -15px; /* gutter size offset */
+}
+.my-masonry-grid_column {
+  padding-left: 15px; /* gutter size offset */
+}
+.my-masonry-grid_column > div {
+  margin-bottom: 15px; /* space between items */
 }

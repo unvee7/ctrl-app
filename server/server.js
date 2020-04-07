@@ -21,7 +21,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.use(function(err, req, res, next) {
   if (err) {
-    req.body = {}
+    // req.body = {}
     res.status(422).send({error: err.message})
     // console.log(err)
   }

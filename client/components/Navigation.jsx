@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';const ReactDOM = 
 const Search = require('./Search.jsx');
 
 
-import PhotosContext from '../components/contexts/photosContext.jsx';
+import PhotosContext from './contexts/modalContext.jsx';
 
 
 function Navigation() {

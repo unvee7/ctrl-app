@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 const axios = require('axios');
-import PhotosContext from '../components/contexts/photosContext.jsx';
+import PhotosContext from './contexts/modalContext.jsx';
 import $ from 'jquery';
 
 const Upload = () => {
@@ -33,7 +33,7 @@ const Upload = () => {
     var filesInput = document.getElementById('uploadedFile');
 
     for (let i = 0; i < filesInput.files.length; i++) {
-      console.log(filesInput.files[i])
+      // console.log(filesInput.files[i])
       formData.append('photoList', filesInput.files[i], filesInput.files[i].name)
     }
     // console.log(fileList)
@@ -48,7 +48,7 @@ const Upload = () => {
     }
     // api call with formdata param
     addNewPhoto(formData);
-
+    toggleModal(e)
   }
 
   const changeTags = (e) => {
@@ -59,12 +59,6 @@ const Upload = () => {
   const changeFile = (e) => {
     e.preventDefault();
     setFile(e.target.value)
-  }
-
-  const toggleHandler = (e) => {
-    if(e.target !== e.currentTarget) return;
-    // this.props.toggle(this.props.isActive)
-    toggleModal(modalIsActive)
   }
 
   // console.log('Uplooad rendered')

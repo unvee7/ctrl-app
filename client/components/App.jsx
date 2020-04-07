@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Upload from '../components/Upload.jsx';
 import AppContainer from '../components/AppContainer.jsx';
-import PhotosContext from '../components/contexts/photosContext.jsx'
+import modalContext from './contexts/modalContext.jsx'
 import axios from 'axios';
 
 // YOU can have multiple contexts, dont have to provide all CONTEXT in root App component
@@ -31,17 +31,17 @@ const App = () => {
   };
 
   return (
-    <PhotosContext.Provider
+    <modalContext.Provider
       value={{
         modalIsActive: modalStatus,
         pending: appPending,
         setPending: setPending,
-        toggleModal: toggleModal
+        toggleModal: toggleModal,
       }}
     >
       <Upload />
       <AppContainer />
-    </PhotosContext.Provider>
+    </modalContext.Provider>
   )
 
 }

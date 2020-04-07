@@ -18,9 +18,10 @@ const defaultCorsHeaders = {
 };
 
 // GET ALL
-router.get('/all', (req, res, next) => {
-
-  Photo.find()
+router.get('/all/:numPhotos', (req, res, next) => {
+  let numPhotos = Number(req.params.numPhotos);
+  console.log(numPhotos)
+  Photo.find().skip(numPhotos).limit(20)
   .select('name file tags createdBy')
   .exec()
   .then( files => {

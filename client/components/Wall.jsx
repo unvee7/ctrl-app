@@ -5,90 +5,71 @@ import _ from 'lodash';
 const Brick = require('./Brick.jsx');
 const $ = require('jquery');
 import axios from 'axios';
-import PhotosContext from '../components/contexts/photosContext.jsx';
+import ModalContext from './contexts/modalContext.jsx';
+import Masonry from 'react-masonry-css'
+
 
 const Wall = () => {
   // CONTEXT
-  const { modalIsActive, pending, setPending, toggleModal } = useContext(PhotosContext);
-
-  // HOOKS
-  // const [photos, setPhotos] = useState([]);
-  // const emptyWall = <div className='wall' > <h1>LOADING imgaes</h1> </div>
-  // const [wall, setWall] = useState(emptyWall);
-
+  const { modalIsActive, pending, setPending, toggleModal} = useContext(ModalContext);
+  //HOOOKS
   const [wallData, setWallData] = useState(
     {
       photos: [],
-      wall: <div className='wall' > <h1>LOADING imgaes</h1> </div>,
-      wallInstance: null
+    }
+  )
+  const [userData, setUserData] = useState(
+    {
+      user: 'sonny',
     }
   )
 
-  const setUpWall = () => {
-    // build an instance of the wall via an existing node in the dom (wall)
-
-    const brickSizes = [
-      { columns: 5, gutter: 20 },
-      { mq: '1224px', columns: 5, gutter: 20 }
-    ];
-
-    const newInstance = Bricks({
-      packed: 'data-packed',
-      sizes: brickSizes,
-      position: true,
-      container: '.wall'
-    });
-
-    newInstance
-      .on('pack',   () => {
-        console.log('ALL grid items packed. #5')
-        // this.props.setPendingTo(false);
-      })
-      .on('update', () => {
-        console.log('NEW grid items packed.')
-      })
-      .on('resize', size => console.log('The grid has be re-packed to accommodate a new BREAKPOINT.'))
-
-    return newInstance;
-  }
-
-  const main = () => {
-    let wall = <div className='wall'> {
-        _.reverse(wallData.photos).map( brick => (<Brick key={brick.id} brick={brick}/>))
-      } </div>
-
-    return wall;
-
-  }
 // ADD ASYNC AWAIT
   const getData = async () => {
-    await axios.get('http://localhost:2000/api/all')
+    await axios({
+        method: 'get',
+        url: 'http://localhost:2000/api/all/' + wallData.photos.length,
+      })
       .then( res => {
+        console.log(wallData.photos.length);
         console.log('axios call')
         setWallData({
-          photos: res.data.photos,
-          wall: main(),
-          wallInstance: setUpWall()
+          photos: [...wallData.photos, ...res.data.photos]
         })
-      }).then( () => {
-        setPending(false)
       })
-      .then( ()=> {
-        setTimeout(wallData.wallInstance.pack, 500);
-      })
+  }
+
+  const scrollHandler = (e) => {
+    console.log('scroll HAND')
+    let element = e.target
+    console.log(element);
+    console.log(element.scrollHeight + ' - ' + element.scrollTop + ' === ' + (element.scrollHeight - element.scrollTop) + ' || NEEDS TO BE ' + element.clientHeight)
+    if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+      getData();
+    }
   }
 
   // this gets called every time it renders and the method calls inside are triggering rerenders so its in an endless loop
-  // useEffect( () => {
-  //   console.log('useEffect')
-  // })
-
-
-  if (pending) {
+  useEffect( () => {
+    console.log('useEffect')
     getData();
-  }
+    console.log(wallData.user)
+  }, [userData])
 
-  return wallData.wall;
+  let bricks = wallData.photos.map( brick => (<Brick key={brick.id} brick={brick}/>));
+  console.log(wallData)
+  return (
+    <div id='wall' className='wall' onScroll={e => scrollHandler(e)}>
+      <Masonry
+        breakpointCols={5}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        { bricks }
+      </Masonry>
+      <button className='load' onclick={e => scrollHandler(e)}> load more </button>
+    </div>
+  )
 
 }
 
